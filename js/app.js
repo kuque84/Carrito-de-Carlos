@@ -27,10 +27,12 @@ function cargarEventListeners() {
 
 
 class Curso {
-    constructor(nombre, info, precio){
-        this.nombre = nombre;
-        this.info = info;
+    constructor(imagen, titulo, precio, id, cantidad){
+        this.imagen = imagen;
+        this.titulo = titulo;
         this.precio = precio;
+        this.id = id;
+        this.cantidad = cantidad;
     }
 }
 
@@ -71,7 +73,9 @@ function agregarCurso(e) {
      if(e.target.classList.contains('agregar-carrito')) {
           const curso = e.target.parentElement.parentElement;
           // Enviamos el curso seleccionado para tomar sus datos
-          console.log(curso)
+          //console.log(curso)
+          //console.log(Curso)
+          console.log(carritoClase)
           leerDatosCurso(curso);
      }
 
@@ -87,9 +91,19 @@ function leerDatosCurso(curso) {
           id: curso.querySelector('a').getAttribute('data-id'), 
           cantidad: 1
      }
-
+     let imagen = curso.querySelector('img').src
+     let titulo = curso.querySelector('h4').textContent
+     let precio = curso.querySelector('.precio span').textContent
+     let id = curso.querySelector('a').getAttribute('data-id')
+     let cantidad = 1
+     console.log(titulo)
+     let nuevo = new Curso(imagen, titulo, precio, id, cantidad)
+     carritoClase.agregar(nuevo);
+     console.log("Curso >>>>")
+     console.table(carritoClase)
 
      if( articulosCarrito.some( curso => curso.id === infoCurso.id ) ) { 
+     //if( articulosCarrito.some( curso => curso.id === carritoClase.Curso.id ) ) { 
           const cursos = articulosCarrito.map( curso => {
                if( curso.id === infoCurso.id ) {
                     curso.cantidad++;
@@ -103,7 +117,7 @@ function leerDatosCurso(curso) {
           articulosCarrito = [...articulosCarrito, infoCurso];
      }
 
-     console.log(articulosCarrito)
+     //console.log(articulosCarrito)
 
      
 
