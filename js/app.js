@@ -24,6 +24,28 @@ function cargarEventListeners() {
 
 }
 //nueva clase hay que crear parametro name que indique nombre del curso
+
+
+class Curso {
+    constructor(nombre, info, precio){
+        this.nombre = nombre;
+        this.info = info;
+        this.precio = precio;
+    }
+}
+
+class Carrito {
+    constructor(curso){
+        this.curso = curso;
+    }
+    agregar(cursoNuevo){
+        this.curso.push(cursoNuevo);
+    }
+}
+
+let carritoClase = new Carrito([]);
+
+/*
 class curso{
      constructor(){
           this.nombre= nombre;
@@ -40,7 +62,7 @@ class curso{
      const conteoCarrito= articulosCarrito.map(x => x+1)
      console.log(conteoCarrito);
 
-
+*/
 // Funciones
 // Función que añade el curso al carrito
 function agregarCurso(e) {
@@ -52,7 +74,9 @@ function agregarCurso(e) {
           console.log(curso)
           leerDatosCurso(curso);
      }
+
 }
+
 
 // Lee los datos del curso
 function leerDatosCurso(curso) {
