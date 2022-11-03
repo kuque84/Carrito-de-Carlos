@@ -102,7 +102,7 @@ function leerDatosCurso(curso) {
      let cantidad = 1
      */
      if( articulosCarrito.cursos.some( cursos => cursos.id === infoCurso.id ) ) { 
-
+          
           const cursos2 = articulosCarrito.cursos.map( Curso => {
                if( Curso.id === infoCurso.id ) {
                     Curso.cantidad++;
@@ -111,6 +111,7 @@ function leerDatosCurso(curso) {
                      return Curso;
              }
           })
+          
           //articulosCarrito = [...cursos];
           console.log(`Modificada cantidad ${articulosCarrito.cursos}`);
           
