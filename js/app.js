@@ -23,6 +23,23 @@ function cargarEventListeners() {
      vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
 
 }
+//nueva clase hay que crear parametro name que indique nombre del curso
+class curso{
+     constructor(){
+          this.nombre= nombre;
+          this.info= infoCurso;
+          this.precio= precio;
+  }
+
+     }
+
+     const curso= new curso();
+     console.log(curso.name, curso.infoCurso, curso.precio);
+
+  //Mapa muestra numero de cursos agregados al carrito
+     const conteoCarrito= articulosCarrito.map(x => x+1)
+     console.log(conteoCarrito);
+
 
 // Funciones
 // Función que añade el curso al carrito
