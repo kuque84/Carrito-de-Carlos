@@ -27,8 +27,21 @@ class Carrito {
     }
 }
 
+const carrito = document.querySelector('#carrito');
+const listaCursos = document.querySelector('#lista-cursos');
+const contenedorCarrito = document.querySelector('#lista-carrito tbody');
+const vaciarCarritoBtn = document.querySelector('#vaciar-carrito');
+
 let articulosCarrito = new Carrito([]);
 let bdc = new baseDeCursos([])
+
+cargarEventListeners();
+
+function cargarEventListeners() {
+    listaCursos.addEventListener('click', agregarCurso);
+    //carrito.addEventListener('click', eliminarCurso);
+    vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
+}
 
 function inicializar (){
     let imagen = 'img/curso1.jpg';
@@ -109,9 +122,8 @@ function agregarCurso(id){
           }
        })
     }else{
-        console.log('NO encontro')
         let imagen = bdc.cursos[foundCurso].imagen;
-        let titulo  = bdc.cursos[foundCurso].titulo;
+        let titulo = bdc.cursos[foundCurso].titulo;
         let precioOriginal = bdc.cursos[foundCurso].precioOriginal;
         let precio = bdc.cursos[foundCurso].precio;
         id = bdc.cursos[foundCurso].id;
@@ -119,16 +131,18 @@ function agregarCurso(id){
         let nuevo = new Curso(imagen, titulo, precioOriginal, precio, id, cantidad);
         articulosCarrito.agregar(nuevo)
 
-        carritoHTML()
         console.log(`Nuevo Curso en carrito:`);
         console.table(articulosCarrito.cursoselegidos);
-
     }
+    carritoHTML()
 }
 
 function carritoHTML() {
-    vaciarCarrito();
     console.log('Escribiendo carrito html');
+    while(contenedorCarrito.firstChild) {
+        contenedorCarrito.removeChild(contenedorCarrito.firstChild);
+    }
+
     articulosCarrito.cursoselegidos.forEach(cursoselegidos => {
          const row = document.createElement('tr');
          row.innerHTML = `
@@ -142,15 +156,17 @@ function carritoHTML() {
                    <a href="#" class="borrar-curso" data-id="${cursoselegidos.id}">X</a>
               </td>
          `;
-         /*contenedorCarrito.appendChild(row);*/
+         contenedorCarrito.appendChild(row);
     });
 
 }
 
-function vaciarCarrito() {/*
+function vaciarCarrito() {
     while(contenedorCarrito.firstChild) {
          contenedorCarrito.removeChild(contenedorCarrito.firstChild);
-     }
-    */}
+    }
+    articulosCarrito.cursoselegidos = [];
+    console.table(articulosCarrito);
+}
 
 console.table(bdc);
