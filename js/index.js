@@ -39,7 +39,7 @@ cargarEventListeners();
 
 function cargarEventListeners() {
     listaCursos.addEventListener('click', agregarCurso);
-    //carrito.addEventListener('click', eliminarCurso);
+    carrito.addEventListener('click', eliminarCurso);
     vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
 }
 
@@ -167,6 +167,19 @@ function vaciarCarrito() {
     }
     articulosCarrito.cursoselegidos = [];
     console.table(articulosCarrito);
+}
+
+function eliminarCurso(e) {
+    e.preventDefault();
+    if(e.target.classList.contains('borrar-curso') ) {
+         // e.target.parentElement.parentElement.remove();
+         const cursoId = e.target.getAttribute('data-id')
+         
+         // Eliminar del arreglo del carrito
+         articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId);
+
+         carritoHTML();
+    }
 }
 
 console.table(bdc);
