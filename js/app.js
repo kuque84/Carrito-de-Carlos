@@ -73,11 +73,9 @@ function agregarCurso(e) {
      if(e.target.classList.contains('agregar-carrito')) {
           const curso = e.target.parentElement.parentElement;
           // Enviamos el curso seleccionado para tomar sus datos
-          //console.log(curso)
-          //console.log(Curso)
-          console.log(`const curso = e.target.parentElement.parentElement > ${curso}`)
-          console.table(articulosCarrito)
+          console.log(curso)
           leerDatosCurso(curso);
+          console.log(curso)
      }
 
 }
@@ -103,7 +101,7 @@ function leerDatosCurso(curso) {
      */
      if( articulosCarrito.cursos.some( cursos => cursos.id === infoCurso.id ) ) { 
           
-          const cursos2 = articulosCarrito.cursos.map( Curso => {
+          articulosCarrito.cursos = articulosCarrito.cursos.map( Curso => {
                if( Curso.id === infoCurso.id ) {
                     Curso.cantidad++;
                      return Curso;
@@ -130,11 +128,6 @@ function leerDatosCurso(curso) {
           console.log(`Nuevo ${articulosCarrito.cursos.Curso}`);
      }
 
-     //console.log(articulosCarrito)
-
-     
-
-     // console.log(articulosCarrito)
      carritoHTML();
 }
 
@@ -158,17 +151,17 @@ function carritoHTML() {
 
      vaciarCarrito();
 
-     articulosCarrito.cursos.forEach(Curso => {
+     articulosCarrito.cursos.forEach(cursos => {
           const row = document.createElement('tr');
           row.innerHTML = `
                <td>  
                     <img src="${Curso.imagen}" width=100>
                </td>
-               <td>${Curso.titulo}</td>
-               <td>${Curso.precio}</td>
-               <td>${Curso.cantidad} </td>
+               <td>${cursos.titulo}</td>
+               <td>${cursos.precio}</td>
+               <td>${cursos.cantidad} </td>
                <td>
-                    <a href="#" class="borrar-curso" data-id="${Curso.id}">X</a>
+                    <a href="#" class="borrar-curso" data-id="${cursos.id}">X</a>
                </td>
           `;
           contenedorCarrito.appendChild(row);
