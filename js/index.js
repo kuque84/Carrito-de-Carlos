@@ -309,6 +309,7 @@ function agregarCurso(id){
 }
 
 function carritoHTML() {
+    let arrtotal = [];
     let total = 0;
     console.log('Escribiendo carrito html');
     while(contenedorCarrito.firstChild) {
@@ -316,7 +317,8 @@ function carritoHTML() {
     }
 
     articulosCarrito.cursoselegidos.forEach(cursoselegidos => {
-        total = total + (parseInt(cursoselegidos.precio) * parseInt(cursoselegidos.cantidad));
+        arrtotal.push(parseInt(cursoselegidos.precio) * parseInt(cursoselegidos.cantidad));
+        //total = total + (parseInt(cursoselegidos.precio) * parseInt(cursoselegidos.cantidad));
          const row = document.createElement('tr');
          row.innerHTML = `
               <td>  
@@ -331,8 +333,18 @@ function carritoHTML() {
          `;
          contenedorCarrito.appendChild(row);
     });
+
+    function suma(elementos) {
+        console.log(elementos);      
+        let resultado = 0;
+        arrtotal.forEach((arg) => {
+          resultado = resultado + arg;
+        });
+        return resultado;
+      }
+    total = (suma(parseInt(...arrtotal)));
     document.getElementById("total").innerHTML = `Total: $${total}`
-    console.log(total);
+
 }
 
 function vaciarCarrito() {
@@ -361,9 +373,5 @@ function eliminarCurso(id) {
         contenedorCarrito.removeChild(contenedorCarrito.firstChild);
     }
     carritoHTML();
-}
-
-function comprar(){
-    console.log(...articulosCarrito.cursoselegidos);
 }
 console.table(bdc);
