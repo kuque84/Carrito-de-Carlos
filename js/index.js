@@ -109,48 +109,57 @@ function agregarCurso(id){
                 console.log(`Cantidad Modificada:`);
                 console.table(articulosCarrito.cursoselegidos);
                 return res;
-             } else {
+            } else {
                 return res;
-          }
+            }
        })
     }else{
+        /*
         let imagen = bdc.cursos[foundCurso].imagen;
         let titulo = bdc.cursos[foundCurso].titulo;
         let precioOriginal = bdc.cursos[foundCurso].precioOriginal;
         let precio = bdc.cursos[foundCurso].precio;
         id = bdc.cursos[foundCurso].id;
         let cantidad = 1;
+       
         let nuevo = new Curso(imagen, titulo, precioOriginal, precio, id, cantidad);
         articulosCarrito.agregar(nuevo)
+        */
+        //console.table(bdc.cursos[foundCurso]);
+        bdc.cursos[foundCurso].cantidad++;
+        articulosCarrito.agregar(bdc.cursos[foundCurso]);  
 
         console.log(`Nuevo Curso en carrito:`);
-        console.table(articulosCarrito.cursoselegidos);
+        console.table(articulosCarrito);
     }
     carritoHTML()
 }
 
 function carritoHTML() {
+    let total = 0;
     console.log('Escribiendo carrito html');
     while(contenedorCarrito.firstChild) {
         contenedorCarrito.removeChild(contenedorCarrito.firstChild);
     }
 
     articulosCarrito.cursoselegidos.forEach(cursoselegidos => {
+        total = total + (parseInt(cursoselegidos.precio) * parseInt(cursoselegidos.cantidad));
          const row = document.createElement('tr');
          row.innerHTML = `
               <td>  
                    <img src="${cursoselegidos.imagen}" width=100>
               </td>
               <td>${cursoselegidos.titulo}</td>
-              <td>${cursoselegidos.precio}</td>
+              <td>$${cursoselegidos.precio}</td>
               <td>${cursoselegidos.cantidad} </td>
               <td>
-                   <a href="#" onclick="eliminarCurso(this.id)" class="borrar-curso" data-id="${cursoselegidos.id}" id="${cursoselegidos.id}">X</a>
+                <a href="#" onclick="eliminarCurso(this.id)" class="borrar-curso" data-id="${cursoselegidos.id}" id="${cursoselegidos.id}">X</a>
               </td>
          `;
          contenedorCarrito.appendChild(row);
     });
-
+    document.getElementById("total").innerHTML = `Total: $${total}`
+    console.log(total);
 }
 
 function vaciarCarrito() {
