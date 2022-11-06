@@ -35,14 +35,6 @@ const vaciarCarritoBtn = document.querySelector('#vaciar-carrito');
 let articulosCarrito = new Carrito([]);
 let bdc = new baseDeCursos([])
 
-cargarEventListeners();
-
-function cargarEventListeners() {
-    listaCursos.addEventListener('click', agregarCurso);
-    carrito.addEventListener('click', eliminarCurso);
-    vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
-}
-
 function inicializar (){
     let imagen = 'img/curso1.jpg';
     let titulo = 'HTML5, CSS3, JavaScript para Principiantes';
@@ -93,26 +85,26 @@ function cargarCursos(){
 }
 
 function agregarCurso(id){
-    function check() {
+    function checkId() {
         return identificador = parseInt(id);
     }
     
     const foundCurso = bdc.cursos.findIndex(res => {
         //console.log(`res.id:${res.id} // id:${id}`);
         res.id = parseInt(res.id);
-        return res.id === check();
+        return res.id === checkId();
     })
     
     const foundCarrito = articulosCarrito.cursoselegidos.findIndex(res => {
         //console.log(`res.id:${res.id} // id:${id}`);
         res.id = parseInt(res.id);
-        return res.id === check();
+        return res.id === checkId();
     })
     
 
-    if( articulosCarrito.cursoselegidos.some(cursoselegidos => cursoselegidos.id === check() ) ) { 
+    if( articulosCarrito.cursoselegidos.some(cursoselegidos => cursoselegidos.id === checkId() ) ) { 
         articulosCarrito.cursoselegidos.map(res => {
-            if(res.id === check()) {
+            if(res.id === checkId()) {
                 articulosCarrito.cursoselegidos[foundCarrito].cantidad++;
                 console.log(`Cantidad Modificada:`);
                 console.table(articulosCarrito.cursoselegidos);
@@ -153,7 +145,7 @@ function carritoHTML() {
               <td>${cursoselegidos.precio}</td>
               <td>${cursoselegidos.cantidad} </td>
               <td>
-                   <a href="#" class="borrar-curso" data-id="${cursoselegidos.id}">X</a>
+                   <a href="#" onclick="eliminarCurso(this.id)" class="borrar-curso" data-id="${cursoselegidos.id}" id="${cursoselegidos.id}">X</a>
               </td>
          `;
          contenedorCarrito.appendChild(row);
@@ -169,17 +161,24 @@ function vaciarCarrito() {
     console.table(articulosCarrito);
 }
 
-function eliminarCurso(e) {
-    e.preventDefault();
-    if(e.target.classList.contains('borrar-curso') ) {
-         // e.target.parentElement.parentElement.remove();
-         const cursoId = e.target.getAttribute('data-id')
-         
-         // Eliminar del arreglo del carrito
-         articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId);
+function eliminarCurso(id) {
+        /*
+        function checkId() {
+            return identificador = parseInt(id);
+        }
+        const foundCarrito = articulosCarrito.cursoselegidos.findIndex(res => {
+            //console.log(`res.id:${res.id} // id:${id}`);
+            res.id = parseInt(res.id);
+            return res.id === checkId();
+        })*/
+        const foundCarrito = articulosCarrito.cursoselegidos.findIndex(res => parseInt(res.id) === parseInt(id))
+    //console.table(articulosCarrito.cursoselegidos[foundCarrito]);
+    articulosCarrito.cursoselegidos.splice(foundCarrito, 1);
 
-         carritoHTML();
+    while(contenedorCarrito.firstChild) {
+        contenedorCarrito.removeChild(contenedorCarrito.firstChild);
     }
+    carritoHTML();
 }
 
 console.table(bdc);
