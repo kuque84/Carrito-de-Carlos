@@ -300,8 +300,8 @@ function agregarCurso(id){
         articulosCarrito.agregar(nuevo)
         */
         //console.table(bdc.cursos[foundCurso]);
-        //bdc.cursos[foundCurso].cantidad++;
         
+        //bdc.cursos[foundCurso].cantidad++;
         articulosCarrito.agregar(bdc.cursos[foundCurso]);
         
         const index = articulosCarrito.cursoselegidos.findIndex(res => {
@@ -345,8 +345,7 @@ function carritoHTML() {
          contenedorCarrito.appendChild(row);
     });
 
-    function suma(elementos) {
-        console.log(elementos);      
+    function suma() {     
         let resultado = 0;
         arrtotal.forEach((arg) => {
           resultado = resultado + arg;
