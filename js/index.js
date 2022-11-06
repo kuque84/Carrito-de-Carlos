@@ -147,7 +147,7 @@ function inicializar (){
 }
 
 function cargarCursos(){
-    console.log(bdc.cursos.length);
+    //console.log(bdc.cursos.length);
     let indice = 0;
     let html = "";
     let card = document.getElementById("cards");
@@ -274,13 +274,14 @@ function agregarCurso(id){
         return res.id === checkId();
     })
     
-
     if( articulosCarrito.cursoselegidos.some(cursoselegidos => cursoselegidos.id === checkId() ) ) { 
         articulosCarrito.cursoselegidos.map(res => {
             if(res.id === checkId()) {
                 articulosCarrito.cursoselegidos[foundCarrito].cantidad++;
+
                 console.log(`Cantidad Modificada:`);
-                console.table(articulosCarrito.cursoselegidos);
+                console.table(articulosCarrito);
+
                 return res;
             } else {
                 return res;
@@ -299,8 +300,18 @@ function agregarCurso(id){
         articulosCarrito.agregar(nuevo)
         */
         //console.table(bdc.cursos[foundCurso]);
-        bdc.cursos[foundCurso].cantidad++;
-        articulosCarrito.agregar(bdc.cursos[foundCurso]);  
+        //bdc.cursos[foundCurso].cantidad++;
+        
+        articulosCarrito.agregar(bdc.cursos[foundCurso]);
+        
+        const index = articulosCarrito.cursoselegidos.findIndex(res => {
+            console.log(`res.id:${res.id} // id:${id}`);
+            res.id = parseInt(res.id);
+            return res.id === checkId();
+        })
+        
+        console.log(articulosCarrito.cursoselegidos[index]);
+        articulosCarrito.cursoselegidos[index].cantidad = 1;
 
         console.log(`Nuevo Curso en carrito:`);
         console.table(articulosCarrito);
@@ -353,6 +364,7 @@ function vaciarCarrito() {
     }
     articulosCarrito.cursoselegidos = [];
     console.table(articulosCarrito);
+    carritoHTML();
 }
 
 function eliminarCurso(id) {
@@ -375,3 +387,4 @@ function eliminarCurso(id) {
     carritoHTML();
 }
 console.table(bdc);
+console.table(articulosCarrito);
