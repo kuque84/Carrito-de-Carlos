@@ -1,3 +1,17 @@
+/*  modal   */
+.swal-modal {
+    margin: 20px;
+  }
+.swal-title {
+    display: block;
+    margin: 20px;
+    text-align: center;
+  }
+  .swal-overlay {
+    background-color: rgba(89, 97, 95, 0.500);
+  }
+
+/*  original    */
 html {
     font-size: 62.5%;
 }
@@ -191,3 +205,4 @@ display: block;
 margin-bottom: 10px;
 text-decoration: none;
 }
+
