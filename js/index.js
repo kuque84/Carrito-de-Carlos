@@ -257,6 +257,7 @@ function cargarCursos(){
     })
     card.innerHTML = html;
 }
+
 function agregarCurso(id){
     function checkId() {
         return identificador = parseInt(id);
@@ -317,6 +318,7 @@ function agregarCurso(id){
         console.table(articulosCarrito);
     }
     carritoHTML()
+    swal("Disfruta tu curso!", "Producto agregado al carrito", "success");
 }
 
 function carritoHTML() {
@@ -364,6 +366,7 @@ function vaciarCarrito() {
     articulosCarrito.cursoselegidos = [];
     console.table(articulosCarrito);
     carritoHTML();
+    swal("Carrito Vacío!", "", "warning");
 }
 
 function eliminarCurso(id) {
@@ -384,6 +387,8 @@ function eliminarCurso(id) {
         contenedorCarrito.removeChild(contenedorCarrito.firstChild);
     }
     carritoHTML();
+    swal("Curso eliminado!", "", "warning");
+
 }
 console.table(bdc);
 console.table(articulosCarrito);
